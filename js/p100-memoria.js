@@ -61,7 +61,7 @@ function seleccio(dificultat) {
             numCartas = 12;
             nFiles = 3;
             nColumnes = 4;
-            maximClicks = 6;
+            maximClicks = 36;
             break;
         case 'alta':
             numCartas = 16;
