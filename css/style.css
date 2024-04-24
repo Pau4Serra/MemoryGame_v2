@@ -55,7 +55,7 @@ body {
     color: black; /* Text color */
 }
 
-#muteMusic {
+#muteButton {
     background-color: #f0f0f0; /* Blue background color */
     width: 50px; /* Set width */
     height: 50px; /* Set height */
@@ -69,11 +69,11 @@ body {
     cursor: pointer; /* Change cursor to pointer */
 }
 
-#muteMusic.muted {
+#muteButton.muted {
     background-image: url('../images/music.png'); /* URL to your custom muted icon */
 }
 
-#muteMusic {
+#muteButton {
     background-image: url('../images/muteMusic.png'); /* URL to your custom unmuted icon */
 }
 
@@ -138,7 +138,6 @@ body {
     backface-visibility: hidden;
 }
 
-
 .darrera {
     background: #999 url(../images/deck.png) 0px -480px; /*cartes DECK*/
     /*background: #999 url(../images/poker1.png) 0px -496px; /*cartes POKER1*/
@@ -149,7 +148,6 @@ body {
     /*background: #999 url(../images/poker1 .png); /*cartes POKER1*/
     transform: rotate3d(0,1,0,-180deg);
 }
-
 
 .carta-girada .darrera {
     transform: rotate3d(0,1,0,180deg);
@@ -172,7 +170,6 @@ button {
     cursor: pointer;
 }
 
-/* Estilos para el pop-up */
 .popup {
     position: fixed;
     top: 50%;

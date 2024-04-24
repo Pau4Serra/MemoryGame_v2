@@ -116,9 +116,9 @@ function repartirCartes() {
             carta.animate({
                 left: carta.data('left'),
                 top: carta.data('top')
-            }, 5000); // Duració de l'animació en mil·lisegons
+            }, 5000); 
             index++;
-            setTimeout(repartirCarta, 2000); // Retard entre cada carta en mil·lisegons
+            setTimeout(repartirCarta, 2000); 
         }
     }
 
@@ -131,7 +131,7 @@ function repartirCartes() {
         $(this).css({top: -1000, left: 500});
     });
 
-    repartirCarta(); // Iniciar l'animació
+    repartirCarta();
 }
 
 
@@ -157,7 +157,7 @@ function gestioParelles() {
         $("#contadorClicks").text("Clicks remaining: " + clicksRestants);
         
 
-        playsoClick();
+        playSoClick();
         
         contadorClicks++;
 
@@ -173,7 +173,7 @@ function gestioParelles() {
             var carta2Clase = carta2.find(".davant").attr("class");
 
             if (carta1Clase === carta2Clase) {
-                playsoParella();
+                playSoParella();
                 carta1.addClass("carta-match");
                 carta2.addClass("carta-match");
                 setTimeout(function() {
@@ -188,6 +188,7 @@ function gestioParelles() {
                 }, 800);
             } else {
                 setTimeout(function() {
+                    playTurn();
                     carta1.toggleClass("carta-girada");
                     carta2.toggleClass("carta-girada");
                 }, 800);
@@ -201,19 +202,6 @@ function gestioParelles() {
         }, 800);
         }
     });
-}
-
-function muteMusic() {
-    var music = document.getElementById('musica'); // Assuming your audio element has the ID 'backgroundMusic'
-    if (music) {
-        music.muted = !music.muted; // Toggle the muted state
-        var muteButton = document.getElementById('muteMusic');
-        if (music.muted) {
-            muteButton.classList.add('muted'); // Add 'muted' class to the button when muted
-        } else {
-            muteButton.classList.remove('muted'); // Remove 'muted' class from the button when unmuted
-        }
-    }
 }
 
 function popupTime() {
@@ -270,7 +258,6 @@ function popupVictoria() {
     });
 }
 
-
 function tauler() {
        
     switch(chosenDeck) {
@@ -297,8 +284,6 @@ function tauler() {
         "height": (alcadaTauler * nFiles) - separacioV*(nFiles-1) + "px"
     });
 }
-
-
 
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -381,7 +366,7 @@ function comencarJoc () {
         creacioCartes();
         gestioParelles();
         tauler();
-
+        playMusic();
         temps();
     } else {
         //console.log("Botons no seleccionats");
@@ -498,18 +483,34 @@ function addCSSClassesDeck(deck) {
     $('head').append(styleTag);
 }
 
-var soClick = new Audio('../so/tap.mp3');
-var soParella = new Audio('../so/pair.mp3');
-function playsoClick() {
+function muteMusic() {
+    musica.muted = !musica.muted;    var muteButton = document.getElementById('muteButton');
+    if (musica.muted) {
+        muteButton.classList.add('muted');
+    } else {
+        muteButton.classList.remove('muted');
+    }
+}
+
+var soClick = new Audio('so/tap.mp3');
+var soParella = new Audio('so/pair.mp3');
+var musica = new Audio('so/music.mp3');
+var turn = new Audio('so/turn.mp3');
+musica.loop = true;
+
+function playSoClick() {
     soClick.play();
 }
 
-
-function reproduirAudio() {
+function playSoParella() {
     soParella.currentTime = 0;
     soParella.play();
 }
 
-function playsoParella() {
-    reproduirAudio();
+function playMusic() {
+    musica.play();
+}
+
+function playTurn() {
+    turn.play();
 }
