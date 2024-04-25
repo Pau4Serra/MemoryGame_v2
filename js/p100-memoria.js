@@ -10,6 +10,14 @@ var chosenDeck;
 var maximClicks;
 var clicksRestants;
 var score = 0;
+var interval;
+var path;
+var soClick;
+var soParella;
+var musica; 
+var turn;
+var gameOver;
+var victory;
 
 $(function() {
     $("#deckSelector").append('<div style="background-image: url(images/deck.png); background-position: 0px -480px; width: 80px; height: 120px;" alt="carta cute" class="tipusCartes" id="cute" onclick="chooseDeck(\'cute\', event)"></div>');
@@ -116,47 +124,60 @@ function repartirCartes() {
             carta.animate({
                 left: carta.data('left'),
                 top: carta.data('top')
-            }, 5000); 
+            }, 1000);
             index++;
-            setTimeout(repartirCarta, 2000); 
+            setTimeout(repartirCarta, 150);
         }
     }
 
     cartes.each(function() {
+        var dist;
+        switch(chosenDeck) {
+            case 'cute':
+                dist = 500;
+                break;
+            case 'pokemon':
+                dist = 600;
+                break;
+            case 'poker':
+                dist = 450;
+                break;
+        }
         var left = $(this).position().left;
         var top = $(this).position().top;
         $(this).css({left: left, top: top});
         $(this).data('left', left);
         $(this).data('top', top);
-        $(this).css({top: -1000, left: 500});
+        $(this).css({top: 0, left: dist});
     });
 
     repartirCarta();
 }
 
 
+
 function gestioParelles() {
     let selectedCards = [];
     let clicksRestants = maximClicks;
+    let canClick = true;
     
     $("#contadorClicks").text("Clicks remaining: " + clicksRestants);
 
-    $(".carta").on("click",function(){
-
-
+    $(".carta").on("click", function() {
+        if (!canClick) return;
+        
         var cartaSeleccionada = $(this);
         if (cartaSeleccionada.hasClass("carta-girada") || cartaSeleccionada.hasClass("carta-match")) {
             return;
         }
 
         if (clicksRestants == 0) {
-            return; // No permitir más interacciones cuando los clicks restantes sean cero
+            return;
         }
 
         clicksRestants--;
         $("#contadorClicks").text("Clicks remaining: " + clicksRestants);
         
-
         playSoClick();
         
         contadorClicks++;
@@ -166,6 +187,8 @@ function gestioParelles() {
         selectedCards.push(cartaSeleccionada);
 
         if (selectedCards.length === 2) {
+            canClick = false;
+            
             var carta1 = selectedCards[0];
             var carta2 = selectedCards[1];
 
@@ -180,17 +203,22 @@ function gestioParelles() {
                     carta1.remove();
                     carta2.remove();
                     numCartas -= 2;
-                    score+=2;
+                    console.log(numCartas);
+                    score += 2;
                     $("#puntuacio").text("Score: " + score);
                     if (numCartas == 0) {
-                        missatgeVictoria(); //PENDING
+                        clearInterval(interval);
+                        popupVictoria();
+                        playVictory();
                     }
+                    canClick = true;
                 }, 800);
             } else {
                 setTimeout(function() {
                     playTurn();
                     carta1.toggleClass("carta-girada");
                     carta2.toggleClass("carta-girada");
+                    canClick = true;
                 }, 800);
             }
 
@@ -198,11 +226,14 @@ function gestioParelles() {
         }
         if (clicksRestants == 0) {
             setTimeout(function() {
-            popupClicks();
-        }, 800);
+                popupClicks();
+                clearInterval(interval);
+                playGameOver();
+            }, 800);
         }
     });
 }
+
 
 function popupTime() {
     $('.carta').off("click");
@@ -242,18 +273,18 @@ function popupClicks() {
 
 function popupVictoria() {
     $('.carta').off("click");
-    var popup = $('<div class="popup"></div>');
+    var popup = $('<div class="popupVictoria"></div>');
     popup.html(`
         <div class="popup-content">
             <h2>You win!</h2>
-            <p>Congratulation!</p>
-            <button id="returnMenu">Return to menu</button>
+            <p>Congratulations!</p>
+            <button id="returnMenu2">Return to menu</button>
         </div>
     `);
 
     $('body').append(popup);
 
-    $('#returnMenu').on('click', function() {
+    $('#returnMenu2').on('click', function() {
         location.reload();
     });
 }
@@ -277,9 +308,8 @@ function tauler() {
 
     ampladaTauler = ampladaCarta + 40;
     alcadaTauler = alcadaCarta + 40;
-    // mida del tauler
+
     $("#tauler").css({
-        //modificat perquè la mida del tauler es modifiqui segons el nombre de cartes
         "width" : (ampladaTauler * nColumnes) - separacioH*(nColumnes-1) + "px",
         "height": (alcadaTauler * nFiles) - separacioV*(nFiles-1) + "px"
     });
@@ -349,13 +379,25 @@ function checkButtons() {
     var dificultatSeleccionada = document.querySelector(".dificultat.seleccionat");
     var cartaSeleccionada = document.querySelector(".tipusCartes.seleccionat");
 
+    //console.log(dificultatSeleccionada)
+    //console.log(cartaSeleccionada);
+
     if (dificultatSeleccionada && cartaSeleccionada) {
         joc.style.display = "block";
         menu.style.display = "none";
 
         return true;
-    }
 
+    } else if(dificultatSeleccionada && cartaSeleccionada == null) {
+        $('#error_deck').css('display', 'block');
+        $('#error_difficulty').css('display', 'none');
+    } else if(dificultatSeleccionada == null && cartaSeleccionada) {
+        $('#error_difficulty').css('display', 'block');
+        $('#error_deck').css('display', 'none');
+    } else {
+        $('#error_difficulty').css('display', 'block');
+        $('#error_deck').css('display', 'block');
+    }
 }
 
 function comencarJoc () {
@@ -366,16 +408,16 @@ function comencarJoc () {
         creacioCartes();
         gestioParelles();
         tauler();
+        musicSelector();
         playMusic();
         temps();
-    } else {
-        //console.log("Botons no seleccionats");
+        repartirCartes();
     }
 }
 
 function startTimer(duration, display) {
     var timer = duration, minutes, seconds;
-    var interval = setInterval(function () {
+    interval = setInterval(function () {
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
 
@@ -387,7 +429,8 @@ function startTimer(duration, display) {
 
         if (timer < 0) {
             clearInterval(interval);
-            popupTime(); // Mostrar el pop-up
+            popupTime();
+            playGameOver();
         }
     }, 1000);
 }
@@ -484,7 +527,8 @@ function addCSSClassesDeck(deck) {
 }
 
 function muteMusic() {
-    musica.muted = !musica.muted;    var muteButton = document.getElementById('muteButton');
+    musica.muted = !musica.muted;    
+    var muteButton = document.getElementById('muteButton');
     if (musica.muted) {
         muteButton.classList.add('muted');
     } else {
@@ -492,12 +536,33 @@ function muteMusic() {
     }
 }
 
-var soClick = new Audio('so/tap.mp3');
-var soParella = new Audio('so/pair.mp3');
-var musica = new Audio('so/music.mp3');
-var turn = new Audio('so/turn.mp3');
-musica.loop = true;
+function musicSelector() {
+    //console.log(chosenDeck);
+    switch(chosenDeck) {
+        case 'cute':
+            path = 'so/cuteMusic.mp3';
+            break;
+        case 'pokemon':
+            path = 'so/pokemonMusic.mp3';
+            break;
+        case 'poker':
+            path = 'so/pokerMusic.mp3';
+            break;
+    }
 
+    soClick = new Audio('so/tap.mp3');
+    soParella = new Audio('so/pair.mp3');
+    musica = new Audio(path);
+    turn = new Audio('so/turn.mp3');
+    gameOver = new Audio('so/gameOver.mp3');
+    victory = new Audio('so/victory.mp3');
+
+    musica.volume = 0.5
+    musica.loop = true;
+}
+
+
+    
 function playSoClick() {
     soClick.play();
 }
@@ -513,4 +578,12 @@ function playMusic() {
 
 function playTurn() {
     turn.play();
+}
+
+function playGameOver() {
+    gameOver.play();
+}
+
+function playVictory() {
+    victory.play();
 }

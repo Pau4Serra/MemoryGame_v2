@@ -27,54 +27,54 @@ body {
 
 #marcador {
     position: fixed;
-    top: 20px; /* Distance from the top */
-    right: 20px; /* Distance from the right */
-    background-color: #f9f9f9; /* Light background color */
-    border: 2px solid #ccc; /* Border around the parent */
-    border-radius: 8px; /* Rounded corners */
-    padding: 15px; /* Padding around the content */
-    width: 200px; /* Set width to fit content */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for depth */
+    top: 20px;
+    right: 20px;
+    background-color: #f9f9f9;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 #time, #contadorClicks, #puntuacio {
-    background-color: #f0f0f0; /* Blue background color */
-    padding: 8px 12px; /* Padding inside child elements */
-    border-radius: 5px; /* Rounded corners for child elements */
-    margin-bottom: 8px; /* Spacing between child elements */
-    border: 1px solid #ccc; /* Border around child elements */
+    background-color: #f0f0f0;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
 }
 
 #time {
-    font-size: 16px; /* Font size */
-    color: #333; /* Text color */
+    font-size: 16px;
+    color: #333;
 }
 
 #contadorClicks {
-    font-size: 14px; /* Font size */
-    color: black; /* Text color */
+    font-size: 14px;
+    color: black;
 }
 
 #muteButton {
-    background-color: #f0f0f0; /* Blue background color */
-    width: 50px; /* Set width */
-    height: 50px; /* Set height */
-    position: fixed; /* Position the button relative to the browser window */
-    top: 10px; /* Distance from the top */
-    left: 10px; /* Distance from the left */
-    z-index: 9999; /* Ensure the button appears on top of other elements */
+    background-color: #f0f0f0;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 70%; /* Adjust the size of the icon */
-    cursor: pointer; /* Change cursor to pointer */
+    background-size: 70%;
+    cursor: pointer;
 }
 
 #muteButton.muted {
-    background-image: url('../images/music.png'); /* URL to your custom muted icon */
+    background-image: url('../images/muteMusic.png');
 }
 
 #muteButton {
-    background-image: url('../images/muteMusic.png'); /* URL to your custom unmuted icon */
+    background-image: url('../images/music.png'); 
 }
 
 .tipusCartes {
@@ -96,31 +96,28 @@ body {
 }
 
 .dificultat.seleccionat {
-    transform: scale(1.1); /* Scale the element slightly */
-    transition: transform 0.2s ease; /* Smooth transition for the scale effect */
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
 }
 
 .carta {
+    
     /*width: 80px;	height: 120px;   /* deck */
     /* width: 111px; height: 111px;  /* pokemon */
     /* width: 79px;	height: 123px;   /* poker1 */
     
     position: absolute;
-    -webkit-perspective: 300px; /* Chrome, Safari, Opera  */
-    perspective: 300px;/*transition: all .3s; */
-    top: 10px;
-    left: 0px;
-    transition: top 0.5s, left 0.5s; 
-    
+    -webkit-perspective: 300px;
+    perspective: 300px;   
 }
 
 .carta.carta-match {
-    opacity: 0; /* Hace que la carta desaparezca gradualmente cuando se empareja */
+    opacity: 0;
     transition: opacity 2s ease;
 }
 .carta-eliminada {
-    opacity: 0; /* Hace que la carta desaparezca gradualmente cuando se elimina */
-    transition: opacity 1s ease; /* Transición de opacidad durante 1 segundo */
+    opacity: 0;
+    transition: opacity 1s ease;
 }
 
 .carta:hover .cara{
@@ -129,8 +126,9 @@ body {
 
 .cara {
     border-radius: 10px;
-    width: 100%;	height: 100%;
-    position: absolute;  /* per poder moure la carta */
+    width: 100%;	
+    height: 100%;
+    position: absolute;
 
     transition-property: transform, shadow;
     transition-duration: .5s;
@@ -140,12 +138,10 @@ body {
 
 .darrera {
     background: #999 url(../images/deck.png) 0px -480px; /*cartes DECK*/
-    /*background: #999 url(../images/poker1.png) 0px -496px; /*cartes POKER1*/
  }
 
 .davant {
-    background: #efefef url(../images/deck.png);/*cartes DECK*/
-    /*background: #999 url(../images/poker1 .png); /*cartes POKER1*/
+    background: #efefef url(../images/deck.png); /*cartes DECK*/
     transform: rotate3d(0,1,0,-180deg);
 }
 
@@ -182,6 +178,18 @@ button {
     z-index: 9999;
 }
 
+.popupVictoria {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+
 .popup-content {
     text-align: center;
 }
@@ -189,6 +197,15 @@ button {
 #returnMenu {
     padding: 10px 20px;
     background: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#returnMenu2 {
+    padding: 10px 20px;
+    background: #04d234;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -222,47 +239,3 @@ button {
 #alta.seleccionat {
     background-color: rgb(204, 30, 30);
 }
-
-
-/* deck */
-/* fila 120 - columna 80) */
-/*
-.carta1 {background-position: 0 0;}
-.carta2 {background-position: -80px 0;} 
-.carta3 {background-position: -160px 0;}
-.carta4 {background-position: -240px 0;}
-.carta5 {background-position: -320px 0;}
-.carta6 {background-position: -400px 0;}
-.carta7 {background-position: -480px 0;}
-.carta8 {background-position: -560px 0;}
-.carta9 {background-position: -640px 0;}
-.carta10 {background-position: -720px 0;}
-*/
-
-
-/* pokemon */
-/* fila 111 - columna 111 
-.carta1{background-position:    0       0; }
-.carta2{background-position: -111px     0; }
-.carta3{background-position: -222px     0; }
-.carta4{background-position: -333px     0; }
-.carta5{background-position: -444px     0; }
-.carta6{background-position: -555px     0; }
-.carta7{background-position: -666px     0; }
-.carta8{background-position:   -0    -111px; }
-
-
-/* poker1 */
-/* fila 124 - columna 79 
-.carta1{background-position:    0     0  ; }
-.carta2{background-position:  -79px   0  ; }
-.carta3{background-position: -158px   0  ; }
-/*...
-.carta14{background-position:    0    -124px; }
-.carta15{background-position:  -79px  -124px; }
-.carta16{background-position:  -158px -124px; }
-/*...
-.carta39{background-position:    -948px -248px; }
-/*...
-.carta40{background-position:    0   -372px; }
-/*...*/

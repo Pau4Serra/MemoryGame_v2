@@ -18,25 +18,18 @@
             <button onclick="dificultat('facil', event)" class="dificultat" id="facil">Easy</button><br>
             <button onclick="dificultat('mitjana', event)" class="dificultat" id="mitjana">Medium</button><br>
             <button onclick="dificultat('alta', event)" class="dificultat" id="alta">Hard</button><br>
+            <div id="error_difficulty" style="display: none; color: red; font-size: 17px;">Please select a difficulty</div>
         </div>
         <h2>Choose deck</h2>
         <br>
-        <div id="deckSelector" style="width: 50%; margin: 0 auto; display: flex; justify-content:space-evenly;">
-            <!--<button onclick="chooseDeck('cute', event)" class="tipusCartes" id="deck">Cute</button>
-                <button onclick="chooseDeck('pokemon', event)" class="tipusCartes" id="pokemon">Pokemon</button>
-                <button onclick="chooseDeck('poker', event)" class="tipusCartes" id="poker">Poker</button>-->
-        
-            <!--img src="images/dorso_cartaCute.png" style="" alt="carta 'cute' "class="tipusCartes" id="deck" onclick="chooseDeck('cute', event)">
-            <img src="images/dorso_cartaCute.png" alt="carta 'pokemon' "class="tipusCartes" id="pokemon" onclick="chooseDeck('pokemon', event)">
-            <img src="images/dorso_cartaCute.png" alt="carta 'poker' "class="tipusCartes" id="poker" onclick="chooseDeck('poker', event)"-->
-        </div>
+        <div id="deckSelector" style="width: 50%; margin: 0 auto; display: flex; justify-content:space-evenly;"></div>
+        <br>
+        <div id="error_deck" style="display: none; color: red; font-size: 17px;">Please select a deck</div>
         <br>
     </div>
     <button onclick="comencarJoc()" id="play">Play</button>
 </div>
-
 <div id="joc" style="display: none;">
-    <audio autoplay id="musica" src="so/music.mp3"></audio>
     <button onclick="muteMusic()" id="muteButton"></button>
     <div id="marcador">
         <div id="time">--:--</div>
@@ -46,6 +39,5 @@
     <br>
     <div id="tauler"></div>
 </div>
-
 </body>
 </html>
