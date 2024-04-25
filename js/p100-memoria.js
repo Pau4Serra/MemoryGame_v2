@@ -201,7 +201,7 @@ function gestioParelles() {
                     carta1.remove();
                     carta2.remove();
                     numCartas -= 2;
-                    console.log(numCartas);
+                    //console.log(numCartas);
                     score += 2;
                     $("#puntuacio").text("Score: " + score);
                     if (numCartas == 0) {
@@ -223,11 +223,22 @@ function gestioParelles() {
             selectedCards = [];     
         }
         if (clicksRestants == 0) {
+            //console.log(numCartas);   
             setTimeout(function() {
-                popupClicks();
-                clearInterval(interval);
-                playGameOver();
-            }, 800);
+                //console.log(numCartas);   
+                if (numCartas == 0) {
+                    console.log("HOLA")
+                    clearInterval(interval);
+                    popupVictoria();
+                    playVictory();
+                } else {
+                    setTimeout(function() {
+                        popupClicks();
+                        clearInterval(interval);
+                        playGameOver();
+                    }, 800);
+                }
+            }, 1000);
         }
     });
 }
@@ -554,7 +565,7 @@ function musicSelector() {
     gameOver = new Audio('so/gameOver.mp3');
     victory = new Audio('so/victory.mp3');
 
-    musica.volume = 0.5
+    musica.volume = 0.3;
     musica.loop = true;
 }
     
