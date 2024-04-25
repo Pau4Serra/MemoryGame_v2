@@ -154,8 +154,6 @@ function repartirCartes() {
     repartirCarta();
 }
 
-
-
 function gestioParelles() {
     let selectedCards = [];
     let clicksRestants = maximClicks;
@@ -233,7 +231,6 @@ function gestioParelles() {
         }
     });
 }
-
 
 function popupTime() {
     $('.carta').off("click");
@@ -560,8 +557,6 @@ function musicSelector() {
     musica.volume = 0.5
     musica.loop = true;
 }
-
-
     
 function playSoClick() {
     soClick.play();
