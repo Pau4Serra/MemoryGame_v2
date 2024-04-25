@@ -204,7 +204,7 @@ function gestioParelles() {
                     //console.log(numCartas);
                     score += 2;
                     $("#puntuacio").text("Score: " + score);
-                    if (numCartas == 0) {
+                    if (numCartas == 0 && clicksRestants > 0) {
                         clearInterval(interval);
                         popupVictoria();
                         playVictory();
@@ -227,18 +227,18 @@ function gestioParelles() {
             setTimeout(function() {
                 //console.log(numCartas);   
                 if (numCartas == 0) {
-                    console.log("HOLA")
                     clearInterval(interval);
                     popupVictoria();
                     playVictory();
+                        
                 } else {
                     setTimeout(function() {
                         popupClicks();
                         clearInterval(interval);
                         playGameOver();
-                    }, 800);
+                    }, 1000);
                 }
-            }, 1000);
+            }, 800);
         }
     });
 }
