@@ -2,11 +2,13 @@ h1 {
     font-family: Consolas;
     font-size: 60px;
     margin: 20px 0;
+    color: rgb(23, 23, 134);
 }
 
 h2 {
     font-family: Consolas;
     margin: 10px 0;
+    color: rgb(23, 23, 134);
 }
 
 body {
@@ -156,8 +158,10 @@ body {
 button {
     margin: 10px;
     padding: 10px 20px;
+    font-weight: bold;
+    font-size: 15px;
     border: none;
-    background-color: rgb(120, 119, 119);
+    background-color: rgb(73, 73, 141);
     color: white;
     border-radius: 5px;
     transition: background-color 0.3s ease;
@@ -212,8 +216,16 @@ button {
     cursor: pointer;
 }
 
+#play {
+    font-size: 20px;
+    background-color: rgb(23, 23, 134);
+}
+
 #play:hover {
-    background-color: rgb(186, 184, 184);
+    background-color: rgb(23, 23, 134);
+    transform: scale(1.1);
+    transition: transform 0.5s ease;
+
 }
 
 #facil:hover {
