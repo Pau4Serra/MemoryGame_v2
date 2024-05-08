@@ -1,0 +1,253 @@
+h1 {
+    font-family: Consolas;
+    font-size: 60px;
+    margin: 20px 0;
+    color: rgb(23, 23, 134);
+}
+
+h2 {
+    font-family: Consolas;
+    margin: 10px 0;
+    color: rgb(23, 23, 134);
+}
+
+body {
+    text-align: center;
+    background: #9e9e9e url(../images/wallpaper_poker.jpg);
+    color: #4A4A4A;
+    background-size: cover;
+}
+
+#tauler {
+    border-radius: 10px;
+    border: 1px solid #666;
+    position: relative;
+    background: #232 url(../images/table.jpg);
+    margin: 0 auto;
+    box-shadow: 0 -1px 0 #999, 0 1px 0 #999, inset 0;
+}
+
+#marcador {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #f9f9f9;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    width: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#time, #contadorClicks, #puntuacio {
+    background-color: #f0f0f0;
+    padding: 8px 12px;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+}
+
+#time {
+    font-size: 16px;
+    color: #333;
+}
+
+#contadorClicks {
+    font-size: 14px;
+    color: #333;
+}
+
+#muteButton {
+    background-color: #f0f0f0;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 9999;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 70%;
+    cursor: pointer;
+}
+
+#muteButton.muted {
+    background-image: url('../images/muteMusic.png');
+}
+
+#muteButton {
+    background-image: url('../images/music.png'); 
+}
+
+.tipusCartes {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.tipusCartes#pokemon {
+    border: 1px solid black
+}
+
+.tipusCartes:hover, .tipusCartes.active {
+    filter: grayscale(0%);
+}
+
+.tipusCartes.active {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+.dificultat.seleccionat {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
+.carta {
+    
+    /*width: 80px;	height: 120px;   /* deck */
+    /* width: 111px; height: 111px;  /* pokemon */
+    /* width: 79px;	height: 123px;   /* poker1 */
+    
+    position: absolute;
+    -webkit-perspective: 300px;
+    perspective: 300px;   
+}
+
+.carta.carta-match {
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+.carta-eliminada {
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.carta:hover .cara{
+    box-shadow: 0 0 10px #aaa;
+}
+
+.cara {
+    border-radius: 10px;
+    width: 100%;	
+    height: 100%;
+    position: absolute;
+
+    transition-property: transform, shadow;
+    transition-duration: .5s;
+
+    backface-visibility: hidden;
+}
+
+.darrera {
+    background: #999 url(../images/deck.png) 0px -480px; /*cartes DECK*/
+ }
+
+.davant {
+    background: #efefef url(../images/deck.png); /*cartes DECK*/
+    transform: rotate3d(0,1,0,-180deg);
+}
+
+.carta-girada .darrera {
+    transform: rotate3d(0,1,0,180deg);
+}
+
+.carta-girada .davant {
+    transform: rotate3d(0,1,0,0deg);
+}
+
+button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-size: 15px;
+    border: none;
+    background-color: rgb(73, 73, 141);
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    width: 300px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+
+.popupVictoria {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+}
+
+.popup-content {
+    text-align: center;
+}
+
+#returnMenu {
+    padding: 10px 20px;
+    background: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#returnMenu2 {
+    padding: 10px 20px;
+    background: #04d234;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#play {
+    font-size: 20px;
+    background-color: rgb(23, 23, 134);
+}
+
+#play:hover {
+    background-color: rgb(23, 23, 134);
+    transform: scale(1.1);
+    transition: transform 0.5s ease;
+
+}
+
+#facil:hover {
+    background-color:rgb(100, 227, 100);
+}
+
+#mitjana:hover {
+    background-color:rgb(242, 194, 98);
+}
+
+#alta:hover {
+    background-color:rgb(249, 112, 91);
+}
+
+#facil.seleccionat {
+    background-color: rgb(54, 146, 25);
+}
+
+#mitjana.seleccionat {
+    background-color: rgb(221, 160, 37);
+}
+
+#alta.seleccionat {
+    background-color: rgb(204, 30, 30);
+}

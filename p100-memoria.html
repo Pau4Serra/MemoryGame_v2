@@ -1,0 +1,45 @@
+<html lang="cat">
+<head>
+    <meta charset="utf-8">
+    <title>MEMORY GAME</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/p100-memoria.js"></script>
+</head>
+<body>
+<header>
+    <h1>MEMORY GAME</h1>
+</header>
+
+<div id="menu">
+    <div id="opcions_menu">
+        <div id="columna_menu">
+            <h2>Choose difficulty</h2>
+            <br>
+            <button onclick="dificultat('facil', event)" class="dificultat" id="facil">Easy</button><br>
+            <button onclick="dificultat('mitjana', event)" class="dificultat" id="mitjana">Medium</button><br>
+            <button onclick="dificultat('alta', event)" class="dificultat" id="alta">Hard</button><br>
+            <div id="error_difficulty" style="display: none; color: red; font-size: 17px;">Please select a difficulty</div>
+            <br>
+        </div>
+        <h2>Choose deck</h2>
+        <br>
+        <div id="deckSelector" style="width: 50%; margin: 0 auto; display: flex; gap: 90px; justify-content: center;"></div>
+        <br>
+        <div id="error_deck" style="display: none; color: red; font-size: 17px;">Please select a deck</div>
+        <br>
+    </div>
+    <button onclick="comencarJoc()" id="play">Play</button>
+</div>
+<div id="joc" style="display: none;">
+    <button onclick="muteMusic()" id="muteButton"></button>
+    <div id="marcador">
+        <div id="time">--:--</div>
+        <div id="contadorClicks">Clicks remaining:</div>
+        <div id="puntuacio">Score: 0</div>
+    </div>
+    <br>
+    <div id="tauler"></div>
+</div>
+</body>
+</html>
